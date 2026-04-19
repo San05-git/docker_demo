@@ -9,21 +9,15 @@ pipeline {
             }
         }
 
-        stage('Tag Image') {
+        stage('Tag Docker Image') {
             steps {
                 bat 'docker tag myapp sannidhi005/myapp:v1'
             }
         }
 
-        stage('Login to Docker Hub') {
+        stage('Docker Login') {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'docker_credentials_d1',
-                    usernameVariable: 'USER',
-                    passwordVariable: 'PASS'
-                )]) {
-                    bat 'echo %PASS% | docker login -u %USER% --password-stdin'
-                }
+                bat 'docker login -u sannidhi005 -p San@docker'
             }
         }
 
