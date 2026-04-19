@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        stage('Push Image') {
+        stage('Login to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
                     credentialsId: 'docker_credentials_d1',
@@ -23,8 +23,13 @@ pipeline {
                     passwordVariable: 'PASS'
                 )]) {
                     bat 'echo %PASS% | docker login -u %USER% --password-stdin'
-                    bat 'docker push sannidhi005/myapp:v1'
                 }
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                bat 'docker push sannidhi005/myapp:v1'
             }
         }
     }
