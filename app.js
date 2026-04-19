@@ -1,1 +1,1 @@
-console.log("Hello, DevOps World!");
+console.log("Webhook test triggered!");
